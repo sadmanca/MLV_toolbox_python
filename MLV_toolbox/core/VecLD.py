@@ -49,3 +49,23 @@ class VecLD:
             ["contours", type(self.contours).__name__, self.contours.shape],
         ]
         return tabulate(data, headers=headers)
+
+    def __eq__(self, other):
+        """
+        Compares two VecLD objects for equality.
+
+        Args:
+            other: the other VecLD object
+
+        Returns:
+            True if the objects are equal, False otherwise
+        """
+        return (
+            self.originalImage == other.originalImage
+            and np.array_equal(self.imsize, other.imsize)
+            and self.lineMethod == other.lineMethod
+            and self.numContours == other.numContours
+            and np.array_equal(self.contours, other.contours)
+        )
+        return False
+        
