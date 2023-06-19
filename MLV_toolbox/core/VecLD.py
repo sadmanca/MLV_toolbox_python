@@ -41,13 +41,16 @@ class VecLD:
         Returns a string representation of the VecLD class in a table.
         """
         headers = ["Variable", "Type", "Value"]
-        data = [
-            ["originalImage", type(self.originalImage).__name__, self.originalImage],
-            ["imsize", type(self.imsize).__name__, self.imsize],
-            ["lineMethod", type(self.lineMethod).__name__, self.lineMethod],
-            ["numContours", type(self.numContours).__name__, self.numContours],
-            ["contours", type(self.contours).__name__, self.contours.shape],
-        ]
+        data = []
+        
+        for attr_name in dir(self):
+            if not attr_name.startswith("__"):                 
+                attr_value = getattr(self, attr_name)
+                if not callable(attr_value):
+                    if isinstance(attr_value, np.ndarray):
+                        attr_value = attr_value.shape
+                    data.append([attr_name, type(attr_value).__name__, attr_value])
+
         return tabulate(data, headers=headers)
 
     def __eq__(self, other):
