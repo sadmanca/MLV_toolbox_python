@@ -5,7 +5,7 @@
 
 import os
 import sys
-sys.path.insert(0, os.path.abspath('../MLV_toolbox/'))
+sys.path.insert(0, os.path.abspath('../MLV_toolbox'))
 
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
@@ -24,6 +24,13 @@ extensions = [
     'sphinx.ext.viewcode'
 ]
 
+napoleon_google_docstring = True
+napoleon_use_param = False
+napoleon_use_ivar = True
+napoleon_custom_sections = [('Returns', 'params_style')]
+
+autodoc_inherit_docstrings = False
+
 templates_path = ['_templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
@@ -32,5 +39,5 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-html_theme = 'sphinx_rtd_theme'
+html_theme = 'alabaster'
 html_static_path = ['_static']

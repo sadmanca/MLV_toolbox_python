@@ -1,5 +1,5 @@
 .. MLV_toolbox_python documentation master file, created by
-   sphinx-quickstart on Sun Jun 11 23:28:56 2023.
+   sphinx-quickstart on Tue Jun 20 22:56:52 2023.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
@@ -7,12 +7,10 @@ Welcome to MLV_toolbox_python's documentation!
 ==============================================
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    :caption: Contents:
 
    modules
-
-
 
 Indices and tables
 ==================
