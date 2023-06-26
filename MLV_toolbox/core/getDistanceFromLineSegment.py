@@ -2,7 +2,7 @@ from MLV_toolbox.core.VecLD import VecLD
 import numpy as np
 
 def getDistanceFromLineSegment(XY: np.ndarray) -> np.ndarray:
-    '''
+    """
     Computes the distance between a set of points and a line segment in 2D space.
 
     Args:
@@ -16,7 +16,8 @@ def getDistanceFromLineSegment(XY: np.ndarray) -> np.ndarray:
 
     Raises:
         ValueError: If the input array is not of shape (N, 4).
-    '''
+    """
+    
     if XY.shape[0] <= 2:
         d = 0
     else:

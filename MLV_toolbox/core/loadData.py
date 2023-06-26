@@ -20,8 +20,7 @@ def importMat(self, filename_mat):
 setattr(VecLD, 'importMat', importMat)
 
 
-@classmethod
-def importMatNew(cls, filename_mat):
+def importMatNew(filename_mat):
     """
     Imports a vectorized linedrawing from a .mat file.
 
@@ -39,6 +38,6 @@ def importMatNew(cls, filename_mat):
     numContours: int = mat['vecLD']['numContours'][0][0][0]
     contours: np.ndarray = mat['vecLD']['contours'][0][0][0]
 
-    return cls(originalImage, imsize, lineMethod, numContours, contours)
+    return VecLD(originalImage, imsize, lineMethod, numContours, contours)
 
 setattr(VecLD, 'importMatNew', importMatNew)

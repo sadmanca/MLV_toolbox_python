@@ -8,8 +8,10 @@ def generateFeatureDensityMap(
     smoothingSigma: float = 0,
     junctionTypes: np.ndarray = None
 ) -> np.ndarray:
-    '''
-    Generates a fixation density map for one of the contour properties and optionally smoothes the map with a 2D Gaussian with standard deviation smoothingSigma.
+    """
+    Generates a fixation density map for one of the contour properties and
+    optionally smoothes the map with a 2D Gaussian with standard deviation
+    smoothingSigma.
 
     Args:
         vecLD (VecLD): the vectorized line drawing with the property already computed.
@@ -28,7 +30,7 @@ def generateFeatureDensityMap(
             is applied. You may want to normalize it to sum to 1 (as a
             probability distribution) or to have 0 mean and unit standard
             deviation (for normalized salience scanpath analysis).
-    '''
+    """
     
     FDM = np.zeros(vecLD.imsize[[1, 0]])
     

@@ -1,5 +1,6 @@
 from MLV_toolbox.core.VecLD import VecLD
 import numpy as np
+from typing import Tuple
 
 def getMATpropertyStats(vecLD: VecLD, 
                        property: str, 

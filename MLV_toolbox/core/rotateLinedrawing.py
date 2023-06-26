@@ -1,7 +1,7 @@
 from MLV_toolbox.core.VecLD import VecLD
 import numpy as np
 
-@classmethod
+# @classmethod
 def rotateLinedrawing(cls, vecLD, angle):
     """
     Rotate a linedrawing by a given angle (in degrees).

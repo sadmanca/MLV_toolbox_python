@@ -9,8 +9,8 @@ def is_outer_border_point(
     jj: float,
     m_Neighbors8: np.ndarray,
     background: int
-) -> result2:
-    '''
+) -> int:
+    """
     Determines whether a point is an outer border point.
     
     Args:
@@ -22,7 +22,7 @@ def is_outer_border_point(
         
     Returns:
         result2 (int): 1 if the point is an outer boundary point, 0 otherwise.
-    '''
+    """
     
     if binaryImage[ii, jj] == background:
         result2 = 0
@@ -55,7 +55,7 @@ def getOuterBoundary(
     np.ndarray,
     np.ndarray
 ]:
-    '''
+    """
     Gets the outer boundary of a binary image.
     
     Args:
@@ -67,7 +67,7 @@ def getOuterBoundary(
             binary image.
         result2 (np.ndarray): Binary image with outer boundary points set to 1 
             and all other points set to 0.
-    '''
+    """
     
     outerBoundary = np.empty(())
     m_Neighbors8 = np.array([[-1,-1], [-1,0], [-1,1], [0,-1], [0,1], [1,-1], [1,0], [1,1]])
@@ -102,7 +102,7 @@ def computeGradientVectorField(
     np.ndarray, 
     int
 ]:
-    '''
+    """
     Computes the gradient vector field of a binary image.
     
     Args:
@@ -111,7 +111,7 @@ def computeGradientVectorField(
     Returns:
         D (np.ndarray): distance map computed with respect to the binary image.
         IDX (int): index of closest point to the boundary.
-    '''
+    """
     
     newBinaryImage = binaryImage.copy()
     outerBoundary = getOuterBoundary(binaryImage, 0)

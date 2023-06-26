@@ -1,8 +1,7 @@
 from MLV_toolbox.core.VecLD import VecLD
 import numpy as np
 
-@classmethod
-def applyCircularAperture(cls, vecLD: VecLD, radius = None):
+def applyCircularAperture(vecLD: VecLD, radius = None):
     """
     Apply circular aperture to the vector line-drawing.
 

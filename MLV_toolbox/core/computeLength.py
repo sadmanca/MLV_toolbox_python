@@ -1,7 +1,7 @@
 from MLV_toolbox.core.VecLD import VecLD
 import numpy as np
 
-def compute_length(self):
+def computeLength(self):
     """
     Computes the length for the contours in the vectorized line drawing `vecLD`.
 
@@ -18,4 +18,4 @@ def compute_length(self):
         vecLD.lengths.append(lengths)
         vecLD.contourLengths[c, 0] = np.sum(lengths)
 
-setattr(VecLD, 'compute_length', compute_length)
+setattr(VecLD, 'computeLength', computeLength)

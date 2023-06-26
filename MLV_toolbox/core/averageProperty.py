@@ -1,12 +1,9 @@
 from MLV_toolbox.core.VecLD import VecLD
 import numpy as np
 
-def averageProperty(
-    vecLD: VecLD, 
-    property: str
-) -> float:
-    '''
-    Computes the average value of a property over the entire               drawing vecLD.
+def averageProperty(vecLD: VecLD, property: str) -> float:
+    """
+    Computes the average value of a property over the entire drawing vecLD.
     
     Args:
         vecLD (VecLD): A VecLD object containing contour data.
@@ -26,7 +23,7 @@ def averageProperty(
     
     Returns:
         meanProperty (float): the mean value of property based on the descriptions above.
-    '''
+    """
     
     property = property.lower()
     
@@ -73,6 +70,8 @@ def averageProperty(
         meanProperty = np.sum(vecLD.separation_allScores)
         
     else:
-        raise ValueError('Unknown property string: ' + property)
+        raise ValueError(f'Unknown property string: {property}')
     
     return meanProperty
+
+setattr(VecLD, 'averageProperty', averageProperty)

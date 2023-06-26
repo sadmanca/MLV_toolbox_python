@@ -7,20 +7,24 @@ def lineIntersection(
     RE: float = 0.3,
     AE: float = 2,
 ) -> np.ndarray:
-    '''
-    Given two line segments and flexibility conditions, this function will judge whether the two line segments intersect and, if so, where.
-    
+    """
+    Determine if two line segments intersect and, if so, where.
+
     Args:
-        queryLine (np.ndarray): A 2x2 array representing the query line segment with start end and point coordinates: [X1,Y1,X2,Y2].
-        refLine (np.ndarray): A 2x2 array representing the reference line segment with start end and point coordinates: [X1,Y1,X2,Y2].
-        RE (float): The relative error threshold for the intersection point, using to judge whether two lines  intersect
-  each other. Default value is 0.3.
-        AE (float): The absolute error threshold for the intersection point, using to judge whter two lines intersect 
-  each other. Default value is 2 pixels.
-  
+        queryLine (np.ndarray): A 2x2 array representing the query line segment
+            with start and end coordinates: [X1,Y1,X2,Y2].
+        refLine (np.ndarray): A 2x2 array representing the reference line
+            segment with start and end coordinates: [X1,Y1,X2,Y2].
+        RE (float): The relative error threshold for the intersection point.
+            Default is 0.3.
+        AE (float): The absolute error threshold for the intersection point in
+            pixels. Default is 2.
+
     Returns:
-        Position (np.ndarray): A 2x1 array representing the intersection point with coordinates: [X,Y]. If the lines do intersect, the coordintes [x,y] of the intersection point.  Otherwise Position will be empty [].
-    '''
+        Position (np.ndarray): A 2x1 array representing the intersection point
+            with coordinates: [X,Y]. If the lines do not intersect, Position
+            will be empty [].
+    """
     
     eps = 1e-4
     

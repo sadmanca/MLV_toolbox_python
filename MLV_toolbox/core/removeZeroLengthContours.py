@@ -3,7 +3,7 @@ from MLV_toolbox.core.computeLength import computeLength
 import numpy as np
 
 def removeZeroLengthContours(vecLD: VecLD):
-    '''
+    """
     Removes contours that only consist of one pixel from a VecLD object.
     
     Args:
@@ -15,7 +15,8 @@ def removeZeroLengthContours(vecLD: VecLD):
         
     Raises:
         TypeError: If vecLD is not a VecLD object.
-    '''
+    """
+    
     if 'contourLengths' not in vecLD:
         vecLD = computeLength(vecLD)
         

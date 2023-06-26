@@ -10,7 +10,7 @@ def computeColorIndex(
     property: str
 ) -> Tuple[
     np.ndarray, 
-    Colormap
+    np.ndarray
 ]:
     """
     Computes the color index for a given property of a vector of contours.
@@ -63,7 +63,7 @@ def computeColorIndex(
         cmap = plt.get_cmap('hsv', numCols)
 
     else:
-        raise ValueError('Unknown property: ' + property)
+        raise ValueError(f'Unknown property: {property}')
 
     return colorIdx, cmap
 
