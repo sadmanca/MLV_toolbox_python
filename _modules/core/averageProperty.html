@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>core.averageProperty &#8212; MLV_toolbox_python 0.0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css" />
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for core.averageProperty</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">MLV_toolbox.core.VecLD</span> <span class="kn">import</span> <span class="n">VecLD</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<div class="viewcode-block" id="averageProperty"><a class="viewcode-back" href="../../core.html#core.averageProperty.averageProperty">[docs]</a><span class="k">def</span> <span class="nf">averageProperty</span><span class="p">(</span><span class="n">vecLD</span><span class="p">:</span> <span class="n">VecLD</span><span class="p">,</span> <span class="nb">property</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Computes the average value of a property over the entire drawing vecLD.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        vecLD (VecLD): A VecLD object containing contour data.</span>
+<span class="sd">        property (str): The property to be averaged.  Must be a property of the VecLD object. The following are valid options for property: &#39;orientation&#39;: </span>
+<span class="sd">            concatenate all straight line segments and return the orientation of the resulting vector, unit: degrees &#39;length&#39;: Return the average of the lengths of the individual contours, unit: pixels &#39;curvature&#39;: compute the mean curvature over all line segments, weighted by the number of pixels in the segments, unit: degrees / pixel &#39;junctions&#39;: compute the number of juncions per 10,000 pixels, comptued as the sum over normJunctionTypeHistogram, unit: count per 10,000 pixels &#39;mirror&#39;,&#39;parallelism&#39;,&#39;separation&#39;: compute the average value over all contour pixels, unit: number between 0 and 1</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        meanProperty (float): the mean value of property based on the descriptions above.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="nb">property</span> <span class="o">=</span> <span class="nb">property</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    
+    <span class="k">if</span> <span class="nb">property</span> <span class="o">==</span> <span class="s1">&#39;orientation&#39;</span><span class="p">:</span>
+        <span class="c1"># all line segments get concatenated</span>
+        <span class="n">totalVec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+        
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">vecLD</span><span class="o">.</span><span class="n">numContours</span><span class="p">):</span>
+            <span class="n">theseVec</span> <span class="o">=</span> <span class="n">vecLD</span><span class="o">.</span><span class="n">contours</span><span class="p">[</span><span class="n">c</span><span class="p">][:,</span> <span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span> <span class="o">-</span> <span class="n">vecLD</span><span class="o">.</span><span class="n">contours</span><span class="p">[</span><span class="n">c</span><span class="p">][:,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+<span class="w">            </span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">            For orientation we need to count line segments irrespective</span>
+<span class="sd">            of the direciton in which they were drawn. So all line segments with</span>
+<span class="sd">            an orientation angle between 180 and 360 degrees get reversed before</span>
+<span class="sd">            they are added to the total vector for the entire drawing. If we</span>
+<span class="sd">            didn&#39;t do this, an alongated closed rectangle would have a totalVec</span>
+<span class="sd">            of [0,0] - that&#39;s not what we mena by &quot;average angle&quot;.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="n">reverseIdx</span> <span class="o">=</span> <span class="n">vecLD</span><span class="o">.</span><span class="n">orientations</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">180</span>
+            <span class="n">theseVec</span><span class="p">[</span><span class="n">reverseIdx</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="o">-</span><span class="n">theseVec</span><span class="p">[</span><span class="n">reverseIdx</span><span class="p">,</span> <span class="p">:]</span>
+            <span class="n">totalVec</span> <span class="o">=</span> <span class="n">totalVec</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">theseVec</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        
+        <span class="n">meanProperty</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">rad2deg</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="o">-</span><span class="n">totalVec</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">totalVec</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span> <span class="o">%</span> <span class="mi">180</span>
+        
+    <span class="k">elif</span> <span class="nb">property</span> <span class="o">==</span> <span class="s1">&#39;length&#39;</span><span class="p">:</span>
+        <span class="n">meanProperty</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">vecLD</span><span class="o">.</span><span class="n">contourLengths</span><span class="p">)</span>
+        
+    <span class="k">elif</span> <span class="nb">property</span> <span class="o">==</span> <span class="s1">&#39;curvature&#39;</span><span class="p">:</span>
+        <span class="n">meanProperty</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">vecLD</span><span class="o">.</span><span class="n">numContours</span><span class="p">):</span>
+            <span class="n">meanProperty</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">vecLD</span><span class="o">.</span><span class="n">curvatures</span><span class="p">[</span><span class="n">c</span><span class="p">])</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">vecLD</span><span class="o">.</span><span class="n">lengths</span><span class="p">[</span><span class="n">c</span><span class="p">]))</span>
+        <span class="n">meanProperty</span> <span class="o">=</span> <span class="n">meanProperty</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">vecLD</span><span class="o">.</span><span class="n">contourLengths</span><span class="p">)</span>
+
+    <span class="k">elif</span> <span class="nb">property</span> <span class="o">==</span> <span class="s1">&#39;junctions&#39;</span><span class="p">:</span>
+        <span class="n">meanProperty</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">vecLD</span><span class="o">.</span><span class="n">normJunctionTypeHistogram</span><span class="p">)</span>
+        
+    <span class="k">elif</span> <span class="nb">property</span> <span class="o">==</span> <span class="s1">&#39;mirror&#39;</span><span class="p">:</span>
+        <span class="n">meanProperty</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">vecLD</span><span class="o">.</span><span class="n">mirror_allScores</span><span class="p">)</span>
+        
+    <span class="k">elif</span> <span class="nb">property</span> <span class="o">==</span> <span class="s1">&#39;parallelism&#39;</span><span class="p">:</span>
+        <span class="n">meanProperty</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">vecLD</span><span class="o">.</span><span class="n">parallelism_allScores</span><span class="p">)</span>
+        
+    <span class="k">elif</span> <span class="nb">property</span> <span class="o">==</span> <span class="s1">&#39;separation&#39;</span><span class="p">:</span>
+        <span class="n">meanProperty</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">vecLD</span><span class="o">.</span><span class="n">separation_allScores</span><span class="p">)</span>
+        
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Unknown property string: </span><span class="si">{</span><span class="nb">property</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">meanProperty</span></div>
+
+<span class="nb">setattr</span><span class="p">(</span><span class="n">VecLD</span><span class="p">,</span> <span class="s1">&#39;averageProperty&#39;</span><span class="p">,</span> <span class="n">averageProperty</span><span class="p">)</span>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">MLV_toolbox_python</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">MLV_toolbox_python</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, Dirk Bernhardt-Walther, Sadman Hossain.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
