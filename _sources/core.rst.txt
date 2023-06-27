@@ -1,141 +1,141 @@
-core package
+MLV_toolbox package
 ============
 
 Submodules
 ----------
 
-core.InitializeNeighborhoods module
+MLV_toolbox.InitializeNeighborhoods module
 -----------------------------------
 
-.. automodule:: core.InitializeNeighborhoods
+.. automodule:: MLV_toolbox.InitializeNeighborhoods
    :members:
    :undoc-members:
    :show-inheritance:
 
-core.VecLD module
+MLV_toolbox.VecLD module
 -----------------
 
-.. automodule:: core.VecLD
+.. automodule:: MLV_toolbox.VecLD
    :members:
    :undoc-members:
    :show-inheritance:
 
-core.applyCircularAperture module
+MLV_toolbox.applyCircularAperture module
 ---------------------------------
 
-.. automodule:: core.applyCircularAperture
+.. automodule:: MLV_toolbox.applyCircularAperture
    :members:
    :undoc-members:
    :show-inheritance:
 
-core.averageProperty module
+MLV_toolbox.averageProperty module
 ---------------------------
 
-.. automodule:: core.averageProperty
+.. automodule:: MLV_toolbox.averageProperty
    :members:
    :undoc-members:
    :show-inheritance:
 
-core.computeColorIndex module
+MLV_toolbox.computeColorIndex module
 -----------------------------
 
-.. automodule:: core.computeColorIndex
+.. automodule:: MLV_toolbox.computeColorIndex
    :members:
    :undoc-members:
    :show-inheritance:
 
-core.computeGradientVectorField module
+MLV_toolbox.computeGradientVectorField module
 --------------------------------------
 
-.. automodule:: core.computeGradientVectorField
+.. automodule:: MLV_toolbox.computeGradientVectorField
    :members:
    :undoc-members:
    :show-inheritance:
 
-core.computeLength module
+MLV_toolbox.computeLength module
 -------------------------
 
-.. automodule:: core.computeLength
+.. automodule:: MLV_toolbox.computeLength
    :members:
    :undoc-members:
    :show-inheritance:
 
-core.computeOrientation module
+MLV_toolbox.computeOrientation module
 ------------------------------
 
-.. automodule:: core.computeOrientation
+.. automodule:: MLV_toolbox.computeOrientation
    :members:
    :undoc-members:
    :show-inheritance:
 
-core.drawLinedrawing module
+MLV_toolbox.drawLinedrawing module
 ---------------------------
 
-.. automodule:: core.drawLinedrawing
+.. automodule:: MLV_toolbox.drawLinedrawing
    :members:
    :undoc-members:
    :show-inheritance:
 
-core.generateFeatureDensityMap module
+MLV_toolbox.generateFeatureDensityMap module
 -------------------------------------
 
-.. automodule:: core.generateFeatureDensityMap
+.. automodule:: MLV_toolbox.generateFeatureDensityMap
    :members:
    :undoc-members:
    :show-inheritance:
 
-core.getDistanceFromLineSegment module
+MLV_toolbox.getDistanceFromLineSegment module
 --------------------------------------
 
-.. automodule:: core.getDistanceFromLineSegment
+.. automodule:: MLV_toolbox.getDistanceFromLineSegment
    :members:
    :undoc-members:
    :show-inheritance:
 
-core.getMATpropertyStats module
+MLV_toolbox.getMATpropertyStats module
 -------------------------------
 
-.. automodule:: core.getMATpropertyStats
+.. automodule:: MLV_toolbox.getMATpropertyStats
    :members:
    :undoc-members:
    :show-inheritance:
 
-core.lineIntersection module
+MLV_toolbox.lineIntersection module
 ----------------------------
 
-.. automodule:: core.lineIntersection
+.. automodule:: MLV_toolbox.lineIntersection
    :members:
    :undoc-members:
    :show-inheritance:
 
-core.loadData module
+MLV_toolbox.loadData module
 --------------------
 
-.. automodule:: core.loadData
+.. automodule:: MLV_toolbox.loadData
    :members:
    :undoc-members:
    :show-inheritance:
 
-core.removeZeroLengthContours module
+MLV_toolbox.removeZeroLengthContours module
 ------------------------------------
 
-.. automodule:: core.removeZeroLengthContours
+.. automodule:: MLV_toolbox.removeZeroLengthContours
    :members:
    :undoc-members:
    :show-inheritance:
 
-core.renderLinedrawing module
+MLV_toolbox.renderLinedrawing module
 -----------------------------
 
-.. automodule:: core.renderLinedrawing
+.. automodule:: MLV_toolbox.renderLinedrawing
    :members:
    :undoc-members:
    :show-inheritance:
 
-core.rotateLinedrawing module
+MLV_toolbox.rotateLinedrawing module
 -----------------------------
 
-.. automodule:: core.rotateLinedrawing
+.. automodule:: MLV_toolbox.rotateLinedrawing
    :members:
    :undoc-members:
    :show-inheritance:
@@ -143,7 +143,7 @@ core.rotateLinedrawing module
 Module contents
 ---------------
 
-.. automodule:: core
+.. automodule:: MLV_toolbox
    :members:
    :undoc-members:
    :show-inheritance:

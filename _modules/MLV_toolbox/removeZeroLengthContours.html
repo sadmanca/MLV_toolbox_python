@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>core.removeZeroLengthContours &#8212; MLV_toolbox_python 0.0.1 documentation</title>
+    <title>MLV_toolbox.removeZeroLengthContours &#8212; MLV_toolbox_python 0.0.4 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css" />
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
@@ -32,12 +32,12 @@
 
           <div class="body" role="main">
             
-  <h1>Source code for core.removeZeroLengthContours</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">MLV_toolbox.core.VecLD</span> <span class="kn">import</span> <span class="n">VecLD</span>
-<span class="kn">from</span> <span class="nn">MLV_toolbox.core.computeLength</span> <span class="kn">import</span> <span class="n">computeLength</span>
+  <h1>Source code for MLV_toolbox.removeZeroLengthContours</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">.VecLD</span> <span class="kn">import</span> <span class="n">VecLD</span>
+<span class="kn">from</span> <span class="nn">.computeLength</span> <span class="kn">import</span> <span class="n">computeLength</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-<div class="viewcode-block" id="removeZeroLengthContours"><a class="viewcode-back" href="../../core.html#core.removeZeroLengthContours.removeZeroLengthContours">[docs]</a><span class="k">def</span> <span class="nf">removeZeroLengthContours</span><span class="p">(</span><span class="n">vecLD</span><span class="p">:</span> <span class="n">VecLD</span><span class="p">):</span>
+<div class="viewcode-block" id="removeZeroLengthContours"><a class="viewcode-back" href="../../core.html#MLV_toolbox.removeZeroLengthContours.removeZeroLengthContours">[docs]</a><span class="k">def</span> <span class="nf">removeZeroLengthContours</span><span class="p">(</span><span class="n">vecLD</span><span class="p">:</span> <span class="n">VecLD</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Removes contours that only consist of one pixel from a VecLD object.</span>
 <span class="sd">    </span>
@@ -55,16 +55,18 @@
     <span class="k">if</span> <span class="s1">&#39;contourLengths&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">vecLD</span><span class="p">:</span>
         <span class="n">vecLD</span> <span class="o">=</span> <span class="n">computeLength</span><span class="p">(</span><span class="n">vecLD</span><span class="p">)</span>
         
-    <span class="n">contourIdxRemoved</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">vecLD</span><span class="o">.</span><span class="n">contourLengths</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
-    <span class="n">numKeepIdx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">vecLD</span><span class="o">.</span><span class="n">contourLengths</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">contourIdxRemoved</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">vecLD</span><span class="o">.</span><span class="n">contourLengths</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">keepIdx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">vecLD</span><span class="o">.</span><span class="n">contourLengths</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
     
     <span class="k">return</span> <span class="n">VecLD</span><span class="p">(</span>
         <span class="n">originalImage</span> <span class="o">=</span> <span class="n">vecLD</span><span class="o">.</span><span class="n">originalImage</span><span class="p">,</span>
         <span class="n">imsize</span> <span class="o">=</span> <span class="n">vecLD</span><span class="o">.</span><span class="n">imsize</span><span class="p">,</span>
         <span class="n">lineMethod</span> <span class="o">=</span> <span class="n">vecLD</span><span class="o">.</span><span class="n">lineMethod</span><span class="p">,</span>
-        <span class="n">numContours</span> <span class="o">=</span> <span class="n">numKeepIdx</span><span class="p">,</span>
-        <span class="n">contours</span> <span class="o">=</span> <span class="n">vecLD</span><span class="o">.</span><span class="n">contours</span>
+        <span class="n">numContours</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">keepIdx</span><span class="p">),</span>
+        <span class="n">contours</span> <span class="o">=</span> <span class="n">vecLD</span><span class="o">.</span><span class="n">contours</span><span class="p">[</span><span class="n">keepIdx</span><span class="p">]</span>
     <span class="p">)</span></div>
+
+<span class="nb">setattr</span><span class="p">(</span><span class="n">VecLD</span><span class="p">,</span> <span class="s1">&#39;removeZeroLengthContours&#39;</span><span class="p">,</span> <span class="n">removeZeroLengthContours</span><span class="p">)</span>
 </pre></div>
 
           </div>
