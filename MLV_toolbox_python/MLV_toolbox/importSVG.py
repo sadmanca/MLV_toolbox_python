@@ -1,5 +1,5 @@
 
-from MLV_toolbox.core.VecLD import VecLD
+from .VecLD import VecLD
 import numpy as np
 import xml.etree.ElementTree as xmltree
 

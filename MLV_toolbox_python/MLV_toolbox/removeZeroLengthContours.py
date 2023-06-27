@@ -1,5 +1,5 @@
-from MLV_toolbox.core.VecLD import VecLD
-from MLV_toolbox.core.computeLength import computeLength
+from .VecLD import VecLD
+from .computeLength import computeLength
 import numpy as np
 
 def removeZeroLengthContours(vecLD: VecLD):

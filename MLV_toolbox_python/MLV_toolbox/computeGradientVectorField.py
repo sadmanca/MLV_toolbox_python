@@ -1,4 +1,4 @@
-from MLV_toolbox.core.VecLD import VecLD
+from .VecLD import VecLD
 import numpy as np
 from typing import Tuple
 from scipy.ndimage.morphology import distance_transform_edt
