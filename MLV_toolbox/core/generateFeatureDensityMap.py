@@ -83,7 +83,6 @@ def generateFeatureDensityMap(
         if smoothingSigma > 0:
             FDM = gaussian_filter(FDM, smoothingSigma)
 
-    ########## WIP ##########
     elif property == 'junctions':
         if len(vecLD.junctions) == 0:
             junctionTypes = []
@@ -131,3 +130,7 @@ def generateFeatureDensityMap(
             FDM = gaussian_filter(FDM, smoothingSigma)
     else:
         raise ValueError(f'Unknown property string: {property}')
+
+    return FDM
+
+setattr(VecLD, 'generateFeatureDensityMap', generateFeatureDensityMap)
