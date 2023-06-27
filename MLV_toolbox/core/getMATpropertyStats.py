@@ -40,3 +40,5 @@ def getMATpropertyStats(vecLD: VecLD,
     shortName = property[:3]
     
     return vecLD, histogram, bins, shortName
+
+setattr(VecLD, 'getMATpropertyStats', getMATpropertyStats)

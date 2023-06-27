@@ -53,3 +53,5 @@ def randomlyShiftContours(
         shiftedLD.contours[c] = vecLD.contours[c] + np.tile(shiftVector, (vecLD.contours[c].shape[0], 1))
     
     return shiftedLD
+
+setattr(VecLD, 'randomlyShiftContours', randomlyShiftContours)

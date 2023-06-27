@@ -57,3 +57,5 @@ def renderJunctions(
     for t in range(len(types)):
         typeIdx = np.array(junctionTypes) == types[t]
         img = cv2.circle(img, tuple(positions[typeIdx][0]), MarkerSize, colors[t], -1)
+        
+setattr(VecLD, 'renderJunctions', renderJunctions)

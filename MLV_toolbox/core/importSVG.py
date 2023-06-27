@@ -458,7 +458,7 @@ def importSVG(svgFilename: str, imsize: np.ndarray = None) -> VecLD:
     )
     
     tree = xmltree.parse(svgFilename).getroot()
-    # vecLD = parseChildNodes(tree, vecLD, '')
+    vecLD = parseChildNodes(tree, vecLD, '')
     
     if imsize is not None:
         vecLD.imsize = imsize
@@ -473,3 +473,5 @@ def importSVG(svgFilename: str, imsize: np.ndarray = None) -> VecLD:
         vecLD.imsize = np.ceil([maxX, maxY])
     
     return vecLD
+
+setattr(VecLD, 'importSVG', importSVG)
