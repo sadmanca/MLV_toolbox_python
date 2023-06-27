@@ -20,13 +20,15 @@ def removeZeroLengthContours(vecLD: VecLD):
     if 'contourLengths' not in vecLD:
         vecLD = computeLength(vecLD)
         
-    contourIdxRemoved = np.where(vecLD.contourLengths == 0)
-    numKeepIdx = np.sum(vecLD.contourLengths > 0)
+    contourIdxRemoved = np.where(vecLD.contourLengths == 0)[0]
+    keepIdx = np.where(vecLD.contourLengths > 0)[0]
     
     return VecLD(
         originalImage = vecLD.originalImage,
         imsize = vecLD.imsize,
         lineMethod = vecLD.lineMethod,
-        numContours = numKeepIdx,
-        contours = vecLD.contours
+        numContours = len(keepIdx),
+        contours = vecLD.contours[keepIdx]
     )
+
+setattr(VecLD, 'removeZeroLengthContours', removeZeroLengthContours)
